@@ -1,22 +1,35 @@
 {
-  "name": "micro-batching-library",
+  "name": "@kalianto/micro-batching-library",
   "version": "0.0.1",
   "description": "Micro Batching Libraby to process pipelines by grouping individual tasks together into small batches",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "build": "tsc",
+    "test": "jest",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/kalianto/micro-batching-library.git"
   },
   "keywords": [
-    "microservice"
+    "microservice",
+    "typescript",
+    "nodejs",
+    "micro-batching",
+    "batch-processing"
   ],
   "author": "Kal Wong",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kalianto/micro-batching-library/issues"
   },
-  "homepage": "https://github.com/kalianto/micro-batching-library#readme"
+  "homepage": "https://github.com/kalianto/micro-batching-library#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^22.5.2",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.5.4"
+  }
 }
