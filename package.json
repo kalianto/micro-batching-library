@@ -1,0 +1,22 @@
+{
+  "name": "micro-batching-library",
+  "version": "0.0.1",
+  "description": "Micro Batching Libraby to process pipelines by grouping individual tasks together into small batches",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kalianto/micro-batching-library.git"
+  },
+  "keywords": [
+    "microservice"
+  ],
+  "author": "Kal Wong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kalianto/micro-batching-library/issues"
+  },
+  "homepage": "https://github.com/kalianto/micro-batching-library#readme"
+}
