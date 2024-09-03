@@ -12,19 +12,24 @@ export class MicroBatching<T, R> {
 
   /**
    *
-   * @param batchProcessor
-   * @param batchSize
-   * @param batchInterval
+   * @param batchProcessor dependency to this project,
+   * @param batchSize size of job to process
+   * @param batchFrequency
    */
   constructor(
     private batchProcessor: BatchProcessor<T, R>,
     private batchSize: number,
-    private batchInterval: number // in miliseconds, as it is used in setTimeout
+    private batchFrequency: number // in miliseconds, as it is used in setTimeout
   ) {}
 
+  /**
+   *
+   * @param job
+   * @returns Promise
+   */
   public async submitJob(job: Job<T>): Promise<R> {
     if (this.isShuttingDown) {
-      throw new Error('Cannot submit job, shutdown in progress');
+      throw new Error('shutdown is in progress');
     }
 
     return new Promise<R>((resolve, reject) => {
@@ -35,7 +40,7 @@ export class MicroBatching<T, R> {
       if (this.jobsList.length >= this.batchSize) {
         this.processJobs();
       } else if (!this.timer) {
-        this.timer = setTimeout(() => this.processJobs(), this.batchInterval);
+        this.timer = setTimeout(() => this.processJobs(), this.batchFrequency);
       }
     });
   }
@@ -46,6 +51,8 @@ export class MicroBatching<T, R> {
       clearTimeout(this.timer);
       this.timer = null;
     }
+
+    // assumption to process all pending jobs before shutting down
     if (this.jobsList.length > 0) {
       await this.processJobs();
     }
@@ -61,6 +68,7 @@ export class MicroBatching<T, R> {
     try {
       await this.batchProcessor(jobsToProcess);
     } catch (error) {
+      // assumption to reject all jobs, if there is an error in the batchProcessor
       jobsToProcess.forEach(({ reject }) => reject(error));
     }
   }

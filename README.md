@@ -47,11 +47,18 @@ const microBatching = createMicroBatching<string>(myBatchProcessor, 5, 2000);
 - Parameters:
   - `batchProcessor` : A function that processes a batch of jobs.
   - `batchSize`: The size of each batch.
-  - `batchInterval`: The time interval between batch processing in miliseconds.
+  - `batchFrequency`: The time interval between batch processing in miliseconds.
 
 ### `createJob`
 
 - Parameters:
   - `data` : The data for the job.
-  - `batchSize`: The size of each batch.
-  - `batchInterval`: The time interval between batch processing.
+
+### `submitJob`
+
+- Parameters:
+  - `job` : job from createJob() function
+
+### `shutdown`
+  Shut down the micro-batching system, ensuring all pending jobs are processed
+  
